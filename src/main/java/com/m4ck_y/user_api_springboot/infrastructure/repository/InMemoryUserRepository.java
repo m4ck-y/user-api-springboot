@@ -18,7 +18,6 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     private void initializeUsers() {
-        // User 1
         UUID id1 = UUID.randomUUID();
         List<Address> addresses1 = new ArrayList<>(List.of(
                 new Address(UUID.randomUUID(), "workaddress", "street No. 1", "UK"),
@@ -29,7 +28,6 @@ public class InMemoryUserRepository implements UserRepository {
                 "01-01-2024 00:00:00", addresses1);
         users.put(id1, user1);
 
-        // User 2
         UUID id2 = UUID.randomUUID();
         List<Address> addresses2 = new ArrayList<>(List.of(
                 new Address(UUID.randomUUID(), "workaddress", "street No. 1", "UK"),
@@ -40,7 +38,6 @@ public class InMemoryUserRepository implements UserRepository {
                 "01-01-2024 00:00:00", addresses2);
         users.put(id2, user2);
 
-        // User 3
         UUID id3 = UUID.randomUUID();
         List<Address> addresses3 = new ArrayList<>(List.of(
                 new Address(UUID.randomUUID(), "workaddress", "street No. 1", "UK"),
