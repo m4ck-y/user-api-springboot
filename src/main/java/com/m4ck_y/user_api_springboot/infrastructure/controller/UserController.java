@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,8 +27,9 @@ public class UserController {
             @RequestParam(required = false) String sortedBy,
             @RequestParam(required = false) String filter) {
         try {
-            System.out.println("Decoded filter: " + filter);
-            var users = userService.getUsers(sortedBy, filter);
+            String decodedFilter = filter != null ? URLDecoder.decode(filter, StandardCharsets.UTF_8) : null;
+            System.out.println("Decoded filter: " + decodedFilter);
+            var users = userService.getUsers(sortedBy, decodedFilter);
             return ResponseEntity.ok(users);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));

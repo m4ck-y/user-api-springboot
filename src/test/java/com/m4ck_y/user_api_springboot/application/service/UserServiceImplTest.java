@@ -82,7 +82,7 @@ class UserServiceImplTest {
 
         when(userRepository.findAll()).thenReturn(Arrays.asList(testUser, user2));
 
-        List<UserDTO> result = userService.getUsers(null, "name+co+test");
+        List<UserDTO> result = userService.getUsers(null, "name co test");
 
         assertEquals(1, result.size());
         assertEquals("testuser", result.get(0).getName());
