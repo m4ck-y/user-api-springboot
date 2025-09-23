@@ -163,7 +163,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private String encryptPassword(String password) {
+    String encryptPassword(String password) {
         try {
             SecretKeySpec key = new SecretKeySpec(aesKey.getBytes(StandardCharsets.UTF_8), ALGORITHM);
             Cipher cipher = Cipher.getInstance(ALGORITHM);

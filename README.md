@@ -12,3 +12,11 @@ El proyecto sigue buenas prácticas en el diseño de APIs REST, utiliza herramie
 
 ## Endpoint
 http://localhost:8080/hello
+
+
+se creo un .env para variables de entorno
+pero como buena practica este no se suba al repo, se agrega al gitignore y se pone un .env.
+
+
+test
+ ./mvnw test
