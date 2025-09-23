@@ -1,25 +1,23 @@
 # User API - Spring Boot
 
-**User API** es una aplicación backend desarrollada con Java y Spring Boot que permite la gestión de usuarios, incluyendo autenticación segura, validaciones personalizadas y cifrado de contraseñas.
+Esta es una aplicacion para manejar usuarios. Tiene funciones para crear, leer, actualizar y borrar usuarios, mas un login para autenticar. Usa validaciones especiales para el tax_id (formato RFC) y telefono (10 digitos). Las contrasenas se guardan encriptadas con AES. Los datos se guardan en memoria por ahora.
 
-El proyecto sigue buenas prácticas en el diseño de APIs REST, utiliza herramientas modernas y gestiona los datos de manera eficiente en memoria.
+El codigo esta organizado en capas: modelos para los datos, servicios para la logica, y controladores para las APIs. Usa UUID para IDs unicos, y timestamps en la zona horaria de Madagascar.
 
-## Ejecutar el proyecto
+## Endpoints principales:
+- GET /users - lista usuarios, con opciones para ordenar y filtrar
+- GET /users/{id} - obtiene un usuario
+- POST /users - crea usuario
+- PATCH /users/{id} - actualiza usuario
+- DELETE /users/{id} - borra usuario
+- POST /users/login - login con tax_id y password
 
-leer variables de entorno en .env
-export $(cat .env | xargs)
-
-```bash
-./mvnw spring-boot:run
-```
-
-## Endpoint
-http://localhost:8080/hello
+## Ejecucion
+(el desarrollo fue en linux):
+1. Copiar .env.example a .env y poner la clave AES_KEY
+2. export $(cat .env | xargs)
+3. ./mvnw spring-boot:run
+4. Ve a http://localhost:8080/swagger-ui/index.html
 
 
-se creo un .env para variables de entorno
-pero como buena practica este no se suba al repo, se agrega al gitignore y se pone un .env.
-
-
-test
- ./mvnw test
+Tests: ./mvnw test
