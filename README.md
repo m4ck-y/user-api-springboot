@@ -24,3 +24,18 @@ Con Docker:
 2. docker run -p 8080:8080 --env-file .env user-api
 
 Tests: ./mvnw test
+
+## Despliegue en GCP Cloud Run
+
+La aplicación está desplegada en Google Cloud Run usando el Dockerfile. URL del servicio: https://user-springboot-967885369144.europe-west1.run.app/swagger-ui/index.html
+
+### Capturas de Pantalla
+
+Settings en Spring Initializr:
+![Spring Initializr](https://storage.googleapis.com/sprintboot_api/spring_initializzr.png)
+
+Despliegue en GCP Run:
+![GCP Run](https://storage.googleapis.com/sprintboot_api/sprint_gcp_run.png)
+
+Uso de Swagger:
+![Swagger](https://storage.googleapis.com/sprintboot_api/sprint_swagger.png)
