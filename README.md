@@ -19,5 +19,8 @@ El codigo esta organizado en capas: modelos para los datos, servicios para la lo
 3. ./mvnw spring-boot:run
 4. Ve a http://localhost:8080/swagger-ui/index.html
 
+Con Docker:
+1. docker build -t user-api .
+2. docker run -p 8080:8080 --env-file .env user-api
 
 Tests: ./mvnw test
