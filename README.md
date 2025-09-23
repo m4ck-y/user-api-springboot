@@ -6,6 +6,9 @@ El proyecto sigue buenas prácticas en el diseño de APIs REST, utiliza herramie
 
 ## Ejecutar el proyecto
 
+leer variables de entorno en .env
+export $(cat .env | xargs)
+
 ```bash
 ./mvnw spring-boot:run
 ```

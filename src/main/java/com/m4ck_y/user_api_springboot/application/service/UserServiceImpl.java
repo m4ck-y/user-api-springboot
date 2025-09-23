@@ -108,8 +108,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private List<User> applyFilter(List<User> users, String filter) {
-        
-        String[] parts = filter.split("\\+");
+
+        String[] parts = filter.split(" ");
         if (parts.length != 3) {
             return users;
         }
