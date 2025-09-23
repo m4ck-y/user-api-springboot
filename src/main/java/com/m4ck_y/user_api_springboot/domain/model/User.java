@@ -1,6 +1,5 @@
 package com.m4ck_y.user_api_springboot.domain.model;
 
-import com.m4ck_y.user_api_springboot.domain.dto.AddressDTO;
 import com.m4ck_y.user_api_springboot.domain.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -61,6 +60,8 @@ public class User {
     }
 
     public static User fromUpdateRequest(UUID id, com.m4ck_y.user_api_springboot.domain.dto.UpdateUserRequest request, User existing) {
+        //Si en request el campo es distinto de null, actualizar el campo del existing.
+        //Si el campo es null, deja el valor original.
         existing.setEmail(request.getEmail() != null ? request.getEmail() : existing.getEmail());
         existing.setName(request.getName() != null ? request.getName() : existing.getName());
         existing.setPhone(request.getPhone() != null ? request.getPhone() : existing.getPhone());
