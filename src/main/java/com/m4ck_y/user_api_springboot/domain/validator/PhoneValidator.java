@@ -14,8 +14,7 @@ public class PhoneValidator implements ConstraintValidator<ValidPhone, String> {
         if (phone == null) {
             return false;
         }
-        // No digitos
         String digits = phone.replaceAll("\\D", "");
-        return digits.length() == 10;
+        return digits.length() >= 10 && digits.length() <= 14;
     }
 }

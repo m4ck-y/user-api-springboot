@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -14,6 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "User Management", description = "APIs for managing users")
 public class UserController {
 
     private final UserService userService;
@@ -23,8 +27,11 @@ public class UserController {
     }
 
     @GetMapping
+    @Operation(summary = "List users", description = "Get all users with optional sorting and filtering")
     public ResponseEntity<?> getUsers(
+            @Parameter(description = "Sort by field: id, email, name, phone, tax_id, created_at")
             @RequestParam(required = false) String sortedBy,
+            @Parameter(description = "Filter format: attribute operator value (e.g., name co user)")
             @RequestParam(required = false) String filter) {
         try {
             String decodedFilter = filter != null ? URLDecoder.decode(filter, StandardCharsets.UTF_8) : null;
@@ -37,6 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get user by ID")
     public ResponseEntity<?> getUser(@PathVariable UUID id) {
         try {
             var users = userService.getUsers(null, null);
@@ -52,6 +60,7 @@ public class UserController {
     }
 
     @PostMapping
+    @Operation(summary = "Create user")
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequest request) {
         try {
             UserDTO user = userService.createUser(request);
@@ -64,6 +73,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
+    @Operation(summary = "Update user")
     public ResponseEntity<?> updateUser(@PathVariable UUID id, @Valid @RequestBody UpdateUserRequest request) {
         try {
             UserDTO user = userService.updateUser(id, request);
@@ -76,6 +86,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete user")
     public ResponseEntity<?> deleteUser(@PathVariable UUID id) {
         try {
             userService.deleteUser(id);
@@ -88,6 +99,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "Authenticate user")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
         try {
             boolean authenticated = userService.authenticate(request.getTaxId(), request.getPassword());

@@ -38,11 +38,19 @@ public class TaxIdValidator implements ConstraintValidator<ValidTaxId, String> {
     }
 
     private boolean isValidDate(String datePart) {
+        System.out.println("datePart: " + datePart);
         try {
             LocalDate date = LocalDate.parse(datePart, DATE_FORMAT);
+            System.out.println("date: " + date);
+            System.out.println("now: " + LocalDate.now());
+
+            if (date.isAfter(LocalDate.now())) {
+                date = date.minusYears(100); // -100 porque 98 lo identifica como 2098 y no como 1998
+            }
 
             return !date.isAfter(LocalDate.now()); // No aceptar fechas en el futuro
         } catch (DateTimeParseException e) {
+            System.out.println("Error al parsear la fecha: " + e.getMessage());
             return false;
         }
     }

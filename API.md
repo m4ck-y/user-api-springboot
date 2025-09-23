@@ -74,6 +74,15 @@ curl -X POST "http://localhost:8080/users/login" \
 -d '{"taxId": "XAXX010101000", "password": "pass123"}'
 ```
 
+## Ejecutar la API
+```bash
+./mvnw spring-boot:run
+```
+
+## Documentación Swagger
+- **Swagger UI**: `http://localhost:8080/swagger-ui/index.html`
+- Prueba los endpoints interactivamente.
+
 ## Modelos
 
 ### UserDTO

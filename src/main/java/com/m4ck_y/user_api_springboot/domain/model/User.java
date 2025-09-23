@@ -36,13 +36,28 @@ public class User {
         dto.setId(user.getId());
         dto.setEmail(user.getEmail());
         dto.setName(user.getName());
-        dto.setPhone(user.getPhone());
+        dto.setPhone(formatPhone(user.getPhone()));
         dto.setTaxId(user.getTaxId());
         dto.setCreatedAt(user.getCreatedAt());
         dto.setAddresses(user.getAddresses() != null ?
             user.getAddresses().stream().map(Address::toDTO).collect(Collectors.toList()) :
             null);
         return dto;
+    }
+
+    private static String formatPhone(String phone) {
+        if (phone == null) return null;
+        String digits = phone.replaceAll("\\D", "");
+        if (digits.length() < 10) return phone;
+        if (digits.length() == 10) {
+            //55 555 555 55
+            return digits.substring(0, 2) + " " + digits.substring(2, 6) + " " + digits.substring(6);
+        } else {
+            //+XX 55 555 555 55
+            String countryCode = digits.substring(0, digits.length() - 10);
+            String local = digits.substring(digits.length() - 10);
+            return "+" + countryCode + " " + local.substring(0, 2) + " " + local.substring(2, 6) + " " + local.substring(6);
+        }
     }
 
     public static User fromCreateRequest(com.m4ck_y.user_api_springboot.domain.dto.CreateUserRequest request) {
